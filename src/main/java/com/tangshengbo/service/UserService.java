@@ -7,6 +7,8 @@ import com.tangshengbo.model.User;
  */
 public interface UserService {
 
-    User  selectUserById(Long id);
+    User selectUserById(Long id);
+
+    User findById(Long id);
 
 }

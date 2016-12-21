@@ -26,4 +26,12 @@ public class UserServiceImpl implements UserService{
         logger.info("UserServiceImpl.selectUserById result:{}",user.toString());
         return user;
     }
+
+    @Override
+    public User findById(Long id) {
+        logger.info("UserServiceImpl.findById param:{}",id);
+        User user = userMapper.findById(id);
+        logger.info("UserServiceImpl.findById result:{}",user.toString());
+        return user;
+    }
 }

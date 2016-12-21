@@ -34,10 +34,13 @@ public class UserController {
     public String post(@PathVariable("id") int id) {
         return String.format("post %d", id);
     }
-    @RequestMapping("/getuser")
-    public User getUser(){
-        logger.info("UserController.getUser param:{}");
-        User user =  userService.selectUserById(1L);
+    @RequestMapping("/getuser/{id}")
+    public User getUser(@PathVariable("id") Long id){
+        logger.info("UserController.getUser param:{}",id);
+        //mybatis xml
+        //User user = userService.selectUserById(id);
+        //mybatis annotation
+        User user = userService.findById(id);
         logger.info("UserController.getUser result:{}",user.toString());
         return user;
     }
