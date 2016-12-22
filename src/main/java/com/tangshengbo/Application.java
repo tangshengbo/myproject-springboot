@@ -61,8 +61,9 @@ public class Application implements EmbeddedServletContainerCustomizer {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
 
-//        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-//        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapping/*.xml"));
+//      PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+//      SqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapping/*.xml"));
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.tangshengbo.service");
 
         return sqlSessionFactoryBean.getObject();
     }

@@ -1,0 +1,17 @@
+-- 用户
+CREATE TABLE USER(
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(50),
+  PASSWORD VARCHAR(50),
+  STATUS INTEGER,
+  descn VARCHAR(200),
+  PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+ALTER TABLE USER ADD CONSTRAINT pk_user PRIMARY KEY(id);
+
+INSERT INTO USER(id,username,PASSWORD,STATUS,descn) VALUES(1,'admin','admin',1,'管理员');
+INSERT INTO USER(id,username,PASSWORD,STATUS,descn) VALUES(2,'user','user',1,'用户');
+
+SELECT * FROM user;
+update user set descn = '唐声波' WHERE id = 1;
+

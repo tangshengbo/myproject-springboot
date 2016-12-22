@@ -40,7 +40,7 @@ public class UserController {
         //mybatis xml
         //User user = userService.selectUserById(id);
         //mybatis annotation
-        User user = userService.findById(id);
+        User user = userService.findUserById(id);
         logger.info("UserController.getUser result:{}",user.toString());
         return user;
     }
