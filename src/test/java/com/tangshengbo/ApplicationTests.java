@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static com.tangshengbo.utils.MD5Util.MD5;
+
 /**
  * Created by Administrator on 2016/12/21.
  */
@@ -27,7 +29,7 @@ public class ApplicationTests {
     @Test
     public void testFindUser() throws Exception {
         User user = userService.findUserById(1L);
-        logger.info("ApplicationTests.testFindUser result:{}",user.toString());
+        logger.info("ApplicationTests.testFindUser result:{}", user.toString());
 
     }
 
@@ -37,17 +39,20 @@ public class ApplicationTests {
         User user = new User();
         user.setUsername("唐声波");
         user.setDescn("管理员");
-        user.setPassword("123456");
+        user.setPassword(MD5("123456789"));
         user.setStatus(1);
 
         int result = userService.addUser(user);
 
-        List<User> users =  userService.findAllUsers();
-        for(User u : users){
-            logger.info("User:{}",u.toString());
+        List<User> users = userService.findAllUsers();
+        for (User u : users) {
+            if (MD5("123456789").equals(u.getPassword())) {
+                logger.warn("MD5 equals {}"+u.getPassword());
+            }
+            logger.info("User:{}", u.toString());
         }
 
-        logger.info("ApplicationTests.testAddUser result:{}",result);
+        logger.info("ApplicationTests.testAddUser result:{}", result);
     }
 
 }
