@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private static Logger logger = LoggerFactory.getLogger(HolleController.class);
+
     @Autowired
     private UserService userService;
 
     @RequestMapping("/name")
-    public String getUserName(){
+    public String getUserName() {
         return "唐声波";
     }
 
@@ -34,14 +35,15 @@ public class UserController {
     public String post(@PathVariable("id") int id) {
         return String.format("post %d", id);
     }
+
     @RequestMapping("/getuser/{id}")
-    public User getUser(@PathVariable("id") Long id){
-        logger.info("UserController.getUser param:{}",id);
+    public User getUser(@PathVariable("id") Long id) {
+        logger.info("UserController.getUser param:{}", id);
         //mybatis xml
         //User user = userService.selectUserById(id);
         //mybatis annotation
         User user = userService.findUserById(id);
-        logger.info("UserController.getUser result:{}",user.toString());
+        logger.info("UserController.getUser result:{}", user.toString());
         return user;
     }
 

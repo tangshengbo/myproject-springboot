@@ -9,7 +9,6 @@ public class BigdecimalTests {
 
     public static void main(String[] args) {
 
-
         Long total= 10000L;
         double totalYuan = 100.0;
         System.out.println("totalYuan" + totalYuan);
@@ -22,7 +21,6 @@ public class BigdecimalTests {
         double calcResult = (totalYuan - settlementAmountYuan) / totalYuan;
         System.out.println(calcResult+"\t");
         System.out.println(calcResultBigDecimal.doubleValue()+"calcResultBigDecimal");
-
 
     }
 }

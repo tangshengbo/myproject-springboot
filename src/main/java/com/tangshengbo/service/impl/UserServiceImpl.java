@@ -18,6 +18,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     private static Logger logger = LoggerFactory.getLogger(HolleController.class);
+
     @Autowired
     private UserMapper userMapper;
 

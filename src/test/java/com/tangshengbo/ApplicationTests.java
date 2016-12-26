@@ -1,6 +1,5 @@
 package com.tangshengbo;
 
-import com.tangshengbo.controller.HolleController;
 import com.tangshengbo.model.User;
 import com.tangshengbo.service.UserService;
 import org.junit.Test;
@@ -21,7 +20,8 @@ import static com.tangshengbo.utils.MD5Util.MD5;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 public class ApplicationTests {
-    private static Logger logger = LoggerFactory.getLogger(HolleController.class);
+
+    private static Logger logger = LoggerFactory.getLogger(ApplicationTests.class);
 
     @Autowired
     private UserService userService;
