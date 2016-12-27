@@ -1,6 +1,6 @@
 package com.tangshengbo.service.impl;
 
-import com.tangshengbo.controller.HolleController;
+import com.tangshengbo.controller.HelloController;
 import com.tangshengbo.dao.UserMapper;
 import com.tangshengbo.model.User;
 import com.tangshengbo.service.UserService;
@@ -17,7 +17,7 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService{
 
-    private static Logger logger = LoggerFactory.getLogger(HolleController.class);
+    private static Logger logger = LoggerFactory.getLogger(HelloController.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -42,6 +42,12 @@ public class UserServiceImpl implements UserService{
     public int addUser(User user) {
         logger.info("UserServiceImpl.addUser param:{}",user.toString());
         int result = userMapper.insert(user);
+
+        //language=MySQL
+        String json = "SELECT * FROM user WHERE id = 1 ";
+
+
+
         logger.info("UserServiceImpl.addUser result:{}",result);
         return result;
     }
