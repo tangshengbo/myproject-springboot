@@ -16,7 +16,7 @@ public class HelloController {
     private static Logger logger = LoggerFactory.getLogger(HelloController.class);
 
     @RequestMapping("/hello")
-    public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
+    public String greeting(@RequestParam(value = "name", required = false, defaultValue = "{\"word\":\"tang\"}") String name, Model model) {
         logger.info("hello");
         model.addAttribute("name", name);
         return "hello";

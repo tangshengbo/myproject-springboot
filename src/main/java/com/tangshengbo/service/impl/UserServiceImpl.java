@@ -9,13 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/20.
  */
 @Service("userService")
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService,Serializable {
 
     private static Logger logger = LoggerFactory.getLogger(HelloController.class);
 
@@ -24,31 +25,30 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User selectUserById(Long id) {
-        logger.info("UserServiceImpl.selectUserById param:{}",id);
+        logger.info("UserServiceImpl.selectUserById param:{}", id);
         User user = userMapper.selectByPrimaryKey(id);
-        logger.info("UserServiceImpl.selectUserById result:{}",user.toString());
+        logger.info("UserServiceImpl.selectUserById result:{}", user.toString());
         return user;
     }
 
     @Override
     public User findUserById(Long id) {
-        logger.info("UserServiceImpl.findById param:{}",id);
+        logger.info("UserServiceImpl.findById param:{}", id);
         User user = userMapper.findById(id);
-        logger.info("UserServiceImpl.findById result:{}",user.toString());
+        logger.info("UserServiceImpl.findById result:{}", user.toString());
         return user;
     }
 
     @Override
     public int addUser(User user) {
-        logger.info("UserServiceImpl.addUser param:{}",user.toString());
+        logger.info("UserServiceImpl.addUser param:{}", user.toString());
         int result = userMapper.insert(user);
 
         //language=MySQL
         String json = "SELECT * FROM user WHERE id = 1 ";
 
 
-
-        logger.info("UserServiceImpl.addUser result:{}",result);
+        logger.info("UserServiceImpl.addUser result:{}", result);
         return result;
     }
 
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService{
     public List<User> findAllUsers() {
         logger.info("UserServiceImpl.findAllUsers param:{}");
         List<User> users = userMapper.findAll();
-        logger.info("UserServiceImpl.findAllUsers result:{}",users.size());
+        logger.info("UserServiceImpl.findAllUsers result:{}", users.size());
         return users;
     }
 }

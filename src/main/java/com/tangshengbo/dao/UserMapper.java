@@ -4,14 +4,15 @@ import com.tangshengbo.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.mapstruct.Mapper;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/20.
  */
-
-public interface UserMapper {
+@Mapper
+public interface UserMapper  {
 
     User selectByPrimaryKey(Long id);
 

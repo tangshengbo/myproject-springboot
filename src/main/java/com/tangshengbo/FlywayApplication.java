@@ -1,6 +1,5 @@
 package com.tangshengbo;
 
-import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +12,7 @@ public class FlywayApplication {
 
     private static Logger logger = LoggerFactory.getLogger(FlywayApplication.class);
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 //        SpringApplication.run(FlywayApplication.class, args);
         logger.info("============= FlywayApplication Start Success =============");
 
@@ -25,5 +24,5 @@ public class FlywayApplication {
 
         // Start the migration
         flyway.migrate();
-    }
+    }*/
 }
