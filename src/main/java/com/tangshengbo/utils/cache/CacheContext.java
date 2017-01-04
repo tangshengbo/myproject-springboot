@@ -1,14 +1,15 @@
 package com.tangshengbo.utils.cache;
 
+import com.google.common.collect.Maps;
+
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Tangshengbo on 2016/12/30.
  */
 public class CacheContext<T> {
 
-    private Map<String, T> cache = new ConcurrentHashMap<>();
+    private Map<String, T> cache = Maps.newConcurrentMap();
 
 
     public T get(String key){
