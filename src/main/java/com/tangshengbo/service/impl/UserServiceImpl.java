@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Administrator on 2016/12/20.
  */
 @Service("userService")
-public class UserServiceImpl implements UserService,Serializable {
+public class UserServiceImpl implements UserService, Serializable {
 
     private static Logger logger = LoggerFactory.getLogger(HelloController.class);
 

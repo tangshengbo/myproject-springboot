@@ -2,6 +2,9 @@ package com.tangshengbo.model;
 
 import java.io.Serializable;
 
+/**
+ * Created by tangshengbo on 2017/1/4.
+ */
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,12 +61,12 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", status=" + status +
-                ", descn='" + descn + '\'' +
-                '}';
+        return "User{"
+                + "id=" + id
+                + ", username='" + username + '\''
+                + ", password='" + password + '\''
+                + ", status=" + status
+                + ", descn='" + descn + '\''
+                + '}';
     }
 }

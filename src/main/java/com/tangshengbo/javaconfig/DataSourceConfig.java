@@ -21,10 +21,11 @@ public class DataSourceConfig {
 
     //DataSource配置
     @Bean
-    @ConfigurationProperties(prefix="spring.datasource")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return new org.apache.tomcat.jdbc.pool.DataSource();
     }
+
     //提供SqlSeesion
     @Bean
     public SqlSessionFactory sqlSessionFactoryBean() throws Exception {

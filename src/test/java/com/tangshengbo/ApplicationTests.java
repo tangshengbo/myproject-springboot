@@ -49,7 +49,7 @@ public class ApplicationTests {
         List<User> users = userService.findAllUsers();
         for (User u : users) {
             if (MD5("123456789").equals(u.getPassword())) {
-                logger.warn("MD5 equals {}"+u.getPassword());
+                logger.warn("MD5 equals {}" + u.getPassword());
             }
             logger.info("User:{}", u.toString());
         }

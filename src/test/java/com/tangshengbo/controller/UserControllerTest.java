@@ -32,9 +32,9 @@ public class UserControllerTest {
     @Test
     public void testGetUser() {
 
-        logger.info("port:{}",port);
+        logger.info("port:{}", port);
 
-        String result = restTemplate.getForObject("http://localhost:"+port+"/user/getuser/1", String.class);
+        String result = restTemplate.getForObject("http://localhost:" + port + "/user/getuser/1", String.class);
 
         logger.info("result:{}", result);
 
@@ -43,9 +43,9 @@ public class UserControllerTest {
     @Test
     public void testGetUserName() {
 
-        logger.info("port:{}",port);
+        logger.info("port:{}", port);
 
-        String result = restTemplate.getForObject("http://localhost:"+port+"/user/name", String.class);
+        String result = restTemplate.getForObject("http://localhost:" + port + "/user/name", String.class);
 
         logger.info("result:{}", result);
 

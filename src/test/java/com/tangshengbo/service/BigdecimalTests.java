@@ -9,7 +9,7 @@ public class BigdecimalTests {
 
     public static void main(String[] args) {
 
-        Long total= 10000L;
+        Long total = 10000L;
         double totalYuan = 100.0;
         System.out.println("totalYuan" + totalYuan);
         BigDecimal totalBigDecimal = BigDecimal.valueOf(totalYuan);
@@ -17,10 +17,10 @@ public class BigdecimalTests {
         System.out.println("settlementAmountYuan" + settlementAmountYuan);
         BigDecimal settlementBigDecimal = BigDecimal.valueOf(settlementAmountYuan);
 
-        BigDecimal calcResultBigDecimal = totalBigDecimal.subtract(settlementBigDecimal).divide(totalBigDecimal,2, BigDecimal.ROUND_UP);
+        BigDecimal calcResultBigDecimal = totalBigDecimal.subtract(settlementBigDecimal).divide(totalBigDecimal, 2, BigDecimal.ROUND_UP);
         double calcResult = (totalYuan - settlementAmountYuan) / totalYuan;
-        System.out.println(calcResult+"\t");
-        System.out.println(calcResultBigDecimal.doubleValue()+"calcResultBigDecimal");
+        System.out.println(calcResult + "\t");
+        System.out.println(calcResultBigDecimal.doubleValue() + "calcResultBigDecimal");
 
     }
 }
