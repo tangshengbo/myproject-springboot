@@ -13,7 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
 
-import static com.tangshengbo.utils.MD5Util.MD5;
+import static com.tangshengbo.utils.MD5Util.md5;
 
 /**
  * Created by Administrator on 2016/12/21.
@@ -41,15 +41,15 @@ public class ApplicationTests {
         User user = new User();
         user.setUsername("唐声波");
         user.setDescn("管理员");
-        user.setPassword(MD5("123456789"));
+        user.setPassword(md5("123456789"));
         user.setStatus(1);
 
         int result = userService.addUser(user);
 
         List<User> users = userService.findAllUsers();
         for (User u : users) {
-            if (MD5("123456789").equals(u.getPassword())) {
-                logger.warn("MD5 equals {}" + u.getPassword());
+            if (md5("123456789").equals(u.getPassword())) {
+                logger.warn("md5 equals {}" + u.getPassword());
             }
             logger.info("User:{}", u.toString());
         }

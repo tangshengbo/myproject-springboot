@@ -6,13 +6,13 @@ public final class MD5Util {
     private MD5Util() { };
 
 
-    public static  String MD5(String s) {
+    public static  String md5(String s) {
         char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'a', 'b', 'c', 'd', 'e', 'f'};
         try {
             byte[] btInput = s.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象
-            MessageDigest mdInst = MessageDigest.getInstance("MD5");
+            MessageDigest mdInst = MessageDigest.getInstance("md5");
             // 使用指定的字节更新摘要
             mdInst.update(btInput);
             // 获得密文
