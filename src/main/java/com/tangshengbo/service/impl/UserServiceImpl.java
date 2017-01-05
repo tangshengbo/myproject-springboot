@@ -9,14 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/20.
  */
 @Service("userService")
-public class UserServiceImpl implements UserService, Serializable {
+public class UserServiceImpl implements UserService {
 
     private static Logger logger = LoggerFactory.getLogger(HelloController.class);
 

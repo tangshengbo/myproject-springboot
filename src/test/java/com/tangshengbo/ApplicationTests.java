@@ -1,5 +1,6 @@
 package com.tangshengbo;
 
+import com.tangshengbo.model.Model;
 import com.tangshengbo.model.User;
 import com.tangshengbo.service.UserService;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.tangshengbo.utils.MD5Util.md5;
@@ -32,7 +34,6 @@ public class ApplicationTests {
     public void testFindUser() throws Exception {
         User user = userService.findUserById(1L);
         logger.info("ApplicationTests.testFindUser result:{}", user.toString());
-
     }
 
     @Test
@@ -55,6 +56,16 @@ public class ApplicationTests {
         }
 
         logger.info("ApplicationTests.testAddUser result:{}", result);
+    }
+
+    @Test
+    public void testLomBok(){
+
+        Model model = new Model();
+        model.setDate(new Date());
+        model.setName("tangshengbo");
+        model.setId("10000");
+        logger.info("LomBok model{}>>>>", model.toString());
     }
 
 }
