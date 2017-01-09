@@ -12,7 +12,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.Date;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static com.tangshengbo.utils.MD5Util.md5;
@@ -62,9 +64,10 @@ public class ApplicationTests {
     public void testLomBok(){
 
         Model model = new Model();
-        model.setDate(new Date());
+        model.setDate(LocalDate.now(Clock.systemDefaultZone()));
         model.setName("tangshengbo");
         model.setId("10000");
+        model.setTime(LocalTime.now());
         logger.info("LomBok model{}>>>>", model.toString());
     }
 

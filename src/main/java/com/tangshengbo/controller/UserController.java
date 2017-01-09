@@ -20,10 +20,13 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private User userEntity;
 
     @RequestMapping("/name")
     public String getUserName() {
-        return "唐声波";
+
+        return userEntity.toString();
     }
 
     @RequestMapping("/users/{username}")

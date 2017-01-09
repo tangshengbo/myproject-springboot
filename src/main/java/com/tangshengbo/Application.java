@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class Application  {
+public class Application {
 
     private static Logger logger = LoggerFactory.getLogger(Application.class);
 
@@ -27,9 +27,11 @@ public class Application  {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+        //修改Banner的模式为OFF
+//        SpringApplicationBuilder builder = new SpringApplicationBuilder(Application.class);
+//        builder.bannerMode(Banner.Mode.OFF).run(args);
         logger.info("============= SpringBoot Start Success =============");
     }
-
 
 
 }

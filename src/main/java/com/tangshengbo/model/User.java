@@ -1,10 +1,15 @@
 package com.tangshengbo.model;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
 /**
  * Created by tangshengbo on 2017/1/4.
  */
+@Component
+@ConfigurationProperties(prefix = "user", locations = "classpath:/model/user.properties")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
