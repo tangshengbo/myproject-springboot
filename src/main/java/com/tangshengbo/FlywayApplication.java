@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Created by Administrator on 2016/12/26.
  */
-@SpringBootApplication
 public class FlywayApplication {
 
     private static Logger logger = LoggerFactory.getLogger(FlywayApplication.class);

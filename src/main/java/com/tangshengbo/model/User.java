@@ -1,19 +1,19 @@
 package com.tangshengbo.model;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
  * Created by tangshengbo on 2017/1/4.
  */
-@Component
-@ConfigurationProperties(prefix = "user", locations = "classpath:/model/user.properties")
+@Entity
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String username;

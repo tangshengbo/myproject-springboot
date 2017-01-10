@@ -1,13 +1,20 @@
 package com.tangshengbo.controller;
 
+import com.tangshengbo.model.Model;
 import com.tangshengbo.model.User;
+import com.tangshengbo.repository.UserRepository;
 import com.tangshengbo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/20.
@@ -20,13 +27,17 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     @Autowired
-    private User userEntity;
+    private Model model;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping("/name")
     public String getUserName() {
 
-        return userEntity.toString();
+        return model.toString();
     }
 
     @RequestMapping("/users/{username}")
@@ -48,6 +59,26 @@ public class UserController {
         User user = userService.findUserById(id);
         logger.info("UserController.getUser result:{}", user.toString());
         return user;
+    }
+
+    @RequestMapping("/sort")
+    public List<User> sort() {
+        List<User> users = userRepository.findAll(new Sort(Sort.Direction.DESC, "id"));
+        return users;
+    }
+
+    //http://localhost:8090/user/page/0/5 第一个参数表示页数，从0开始计，第二个参数表示每页的数据量
+    @RequestMapping("/page/{page}/{size}")
+    public Page page(@PathVariable("page") int page, @PathVariable("size") int size) {
+        Page users = userRepository.findAll(new PageRequest(page, size));
+        return users;
+    }
+
+
+    @RequestMapping("/first/{username}")
+    public List<User> findFirst10(@PathVariable("username") String username) {
+        List<User> users = userRepository.findTop5Byusername(username);
+        return users;
     }
 
 

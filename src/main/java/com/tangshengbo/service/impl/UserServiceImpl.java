@@ -22,6 +22,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+
+
     @Override
     public User selectUserById(Long id) {
         logger.info("UserServiceImpl.selectUserById param:{}", id);

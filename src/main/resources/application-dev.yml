@@ -1,6 +1,8 @@
 server:
     port: 8090
     address: localhost
+    compression:
+      enabled: true
 
 logging:
   level:
@@ -17,6 +19,17 @@ spring:
         driver-class-name: net.sf.log4jdbc.DriverSpy
     thymeleaf:
       cache: false
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+    jackson:
+      serialization: true
+    data:
+      rest:
+        base-path: /api
+
+
 
 flyway:
   url: jdbc:mysql://127.0.0.1:3306/myproject?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull
