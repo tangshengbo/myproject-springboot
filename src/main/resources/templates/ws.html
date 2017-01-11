@@ -31,7 +31,7 @@
         $("#response").html();
     }
     function connect() {
-        var socket = new SockJS('/endpointSang');
+        var socket = new SockJS('/endpointTang');
         console.warn(socket);
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
