@@ -17,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //设置不拦截规则
-        web.ignoring().antMatchers("/resources/static/**");
+        web.ignoring().antMatchers("/resources/static/**").antMatchers("/resources/public/**");
     }
 
     @Override
