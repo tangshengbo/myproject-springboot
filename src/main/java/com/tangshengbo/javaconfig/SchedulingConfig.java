@@ -15,10 +15,11 @@ public class SchedulingConfig {
 
     private static Logger logger = LoggerFactory.getLogger(SchedulingConfig.class);
 
+    private int count;
 
     @Scheduled(cron = "0/5 * * * * ?") // 每5秒执行一次
     public void scheduler() {
-        logger.info(">>>>>>>>>>>>>springBoot scheduled ... ");
+        logger.info(">>>>>>>>>>>>>springBoot scheduled ... "+count++);
 
     }
 
