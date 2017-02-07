@@ -2,10 +2,6 @@ package com.tangshengbo.javaconfig;
 
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.web.servlet.ErrorPage;
-import org.springframework.http.HttpStatus;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by tangshengbo on 2017/1/10.
@@ -14,9 +10,9 @@ public class CustomServletContainerConfig implements EmbeddedServletContainerCus
 
     @Override
     public void customize(ConfigurableEmbeddedServletContainer container) {
-        container.setPort(8090);
+       /* container.setPort(8090);
         container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404.html"));
-        container.setSessionTimeout(10, TimeUnit.MINUTES);
+        container.setSessionTimeout(10, TimeUnit.MINUTES);*/
     }
 
 }
