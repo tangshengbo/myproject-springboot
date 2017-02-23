@@ -18,7 +18,7 @@ import java.security.Principal;
 @Controller
 public class WsController {
 
-    private static Logger logger = LoggerFactory.getLogger(HelloController.class);
+    private static Logger logger = LoggerFactory.getLogger(WsController.class);
 
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
