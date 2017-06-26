@@ -17,7 +17,7 @@ public class SchedulingConfig {
 
     private int count;
 
-    @Scheduled(cron = "0/5 * * * * ?") // 每5秒执行一次
+    @Scheduled(cron = "0 0/1 * * * ?") // 每1分钟执行一次
     public void scheduler() {
         logger.info(">>>>>>>>>>>>>springBoot scheduled ... " + count++);
     }

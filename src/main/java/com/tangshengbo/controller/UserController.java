@@ -36,7 +36,6 @@ public class UserController {
 
     @RequestMapping("/name")
     public String getUserName() {
-
         return model.toString();
     }
 
@@ -80,6 +79,5 @@ public class UserController {
         List<User> users = userRepository.findTop5Byusername(username);
         return users;
     }
-
 
 }

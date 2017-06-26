@@ -22,8 +22,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-
-
     @Override
     public User selectUserById(Long id) {
         logger.info("UserServiceImpl.selectUserById param:{}", id);
@@ -44,11 +42,8 @@ public class UserServiceImpl implements UserService {
     public int addUser(User user) {
         logger.info("UserServiceImpl.addUser param:{}", user.toString());
         int result = userMapper.insert(user);
-
         //language=MySQL
         String json = "SELECT * FROM user WHERE id = 1 ";
-
-
         logger.info("UserServiceImpl.addUser result:{}", result);
         return result;
     }
