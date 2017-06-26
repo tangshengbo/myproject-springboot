@@ -1,6 +1,5 @@
 package com.tangshengbo;
 
-import com.tangshengbo.model.Model;
 import com.tangshengbo.model.User;
 import com.tangshengbo.service.UserService;
 import org.junit.Test;
@@ -11,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.Clock;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 import static com.tangshengbo.utils.MD5Util.md5;
@@ -38,7 +34,6 @@ public class ApplicationTests {
 
     @Test
     public void testAddUser() throws Exception {
-
         User user = new User();
         user.setUsername("唐声波");
         user.setDescn("管理员");
@@ -46,7 +41,6 @@ public class ApplicationTests {
         user.setStatus(1);
 
         int result = userService.addUser(user);
-
         List<User> users = userService.findAllUsers();
         for (User u : users) {
             if (md5("123456789").equals(u.getPassword())) {
@@ -54,19 +48,17 @@ public class ApplicationTests {
             }
             logger.info("User:{}", u.toString());
         }
-
         logger.info("ApplicationTests.testAddUser result:{}", result);
     }
 
     @Test
     public void testLomBok(){
-
-        Model model = new Model();
-        model.setDate(LocalDate.now(Clock.systemDefaultZone()));
-        model.setName("tangshengbo");
-        model.setId("10000");
-        model.setTime(LocalTime.now());
-        logger.info("LomBok model{}>>>>", model.toString());
+//        Model model = new Model();
+//        model.setDate(LocalDate.now(Clock.systemDefaultZone()));
+//        model.setName("tangshengbo");
+//        model.setId("10000");
+//        model.setTime(LocalTime.now());
+//        logger.info("LomBok model{}>>>>", model.toString());
     }
 
 }
