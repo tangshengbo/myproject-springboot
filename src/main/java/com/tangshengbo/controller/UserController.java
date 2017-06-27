@@ -1,5 +1,6 @@
 package com.tangshengbo.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.tangshengbo.model.Model;
 import com.tangshengbo.model.User;
 import com.tangshengbo.repository.UserRepository;
@@ -78,6 +79,11 @@ public class UserController {
     public List<User> findFirst10(@PathVariable("username") String username) {
         List<User> users = userRepository.findTop5Byusername(username);
         return users;
+    }
+    @RequestMapping("/pagehelper/{page}/{size}")
+    public List<User> listUserByPage(@PathVariable("page") int page, @PathVariable("size") int size) {
+        PageHelper.startPage(page,size);
+        return userService.findAllUsers();
     }
 
 }
