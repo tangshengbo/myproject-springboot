@@ -58,7 +58,7 @@ public class RedisController {
     public String redisCache() {
         redisClient.set("shanhy", "hello,shanhy", 100);
         logger.info("getRedisValue = {}", redisClient.get("shanhy"));
-        logger.info("cacheByAutoKey = {}" + redisService.cacheByAutoKey("aaa", "bbb"));
+        logger.info("getRedisValue = {}", redisClient.get("tang"));
         return redisService.cache();
     }
 }
