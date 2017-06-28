@@ -32,7 +32,7 @@ public class RedisServiceImpl implements RedisService {
     /**
      * 存储在Redis中的key自动生成，生成规则详见CachingConfig.keyGenerator()方法
      */
-    @Cacheable(value = RedisKeys._CACHE_TEST)
+    @Cacheable()
     @Override
     public String cacheByAutoKey(String k1, String k2) {
         return RandomStringUtils.randomNumeric(4);

@@ -32,5 +32,4 @@ public class RedisServiceTest {
         Long size = redisService.dbSize();
         logger.info("size:{}", size);
     }
-
 }

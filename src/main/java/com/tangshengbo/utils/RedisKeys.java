@@ -14,7 +14,7 @@ public class RedisKeys {
 
     // 测试 begin
     public static final String _CACHE_TEST = "_cache_test";// 缓存key
-    public static final Long _CACHE_TEST_SECOND = 10L;// 缓存时间
+    public static final Long _CACHE_TEST_SECOND = 20L;// 缓存时间
     // 测试 end
 
     // 根据key设定具体的缓存时间

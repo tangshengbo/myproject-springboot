@@ -1,6 +1,5 @@
 package com.tangshengbo.service.impl;
 
-import com.tangshengbo.controller.HelloController;
 import com.tangshengbo.dao.UserMapper;
 import com.tangshengbo.model.User;
 import com.tangshengbo.service.UserService;
@@ -19,7 +18,7 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    private static Logger logger = LoggerFactory.getLogger(HelloController.class);
+    private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;

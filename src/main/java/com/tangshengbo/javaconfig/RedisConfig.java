@@ -1,10 +1,8 @@
 package com.tangshengbo.javaconfig;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tangshengbo.utils.RedisKeys;
-import com.tangshengbo.utils.RedisObjectSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -15,8 +13,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.OxmSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.lang.reflect.Method;
@@ -28,8 +27,9 @@ import java.util.List;
  */
 @Configuration
 @EnableCaching
-public class CachingConfig extends CachingConfigurerSupport {
+public class RedisConfig extends CachingConfigurerSupport {
 
+    private static Logger logger = LoggerFactory.getLogger(SchedulingConfig.class);
     /**
      * 在使用@Cacheable时，如果不指定key，则使用找个默认的key生成器生成的key
      */
@@ -56,6 +56,7 @@ public class CachingConfig extends CachingConfigurerSupport {
                 if (paramsSb.length() > 0) {
                     sb.append("_").append(paramsSb);
                 }
+                logger.info("keyGenerator:{}", sb.toString());
                 return sb.toString();
             }
         };
@@ -85,6 +86,7 @@ public class CachingConfig extends CachingConfigurerSupport {
     public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory factory) {
         RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        JdkSerializationRedisSerializer jdkSerializationRedisSerializer = new JdkSerializationRedisSerializer();
         template.setConnectionFactory(factory);
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(jackson2JsonRedisSerializer);
