@@ -4,9 +4,6 @@ import com.tangshengbo.service.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.jedis.RedisClient;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,42 +20,24 @@ public class RedisController {
     private static Logger logger = LoggerFactory.getLogger(RedisController.class);
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    private RedisClient redisClient;
-
-    @Autowired
     private RedisService redisService;
 
-    /**
-     * 缓存测试
-     */
-    @RequestMapping("/redisTest/{redisValue}")
-    public String redisTest(@PathVariable String redisValue) {
-        String result = "";
+    @RequestMapping("/redisCache/{key}/{value}/{timeOut}")
+    public String redisCache(@PathVariable("key") String key, @PathVariable("value") String value,
+                             @PathVariable("timeOut") String timeOut) {
+        boolean valid;
+        valid =redisService.setNX(key, value, Long.parseLong(timeOut));
+        logger.info("valid:{}", valid);
+        logger.info("获得数据:{}", redisService.get(key));
         try {
-            redisTemplate.opsForValue().set("test-key", redisValue, 5, TimeUnit.SECONDS);// 缓存有效期2秒
-
-            logger.info("从Redis中读取数据：" + redisTemplate.opsForValue().get("test-key").toString());
-
             TimeUnit.SECONDS.sleep(3);
-
-            result = (String) redisTemplate.opsForValue().getAndSet("test-key","唐波");
-            logger.info("等待3秒后尝试读取过期的数据:" + redisTemplate.opsForValue().get("test-key"));
-
-            logger.info("等待3秒后尝试读取过期的数据：" + result);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return result;
-    }
-
-    @GetMapping("/redisCache")
-    public String redisCache() {
-        redisClient.set("shanhy", "hello,shanhy", 100);
-        logger.info("getRedisValue = {}", redisClient.get("shanhy"));
-        logger.info("getRedisValue = {}", redisClient.get("tang"));
-        return redisService.cache();
+        valid = redisService.setNX(key, key + value);
+        logger.info("valid:{}", valid);
+        logger.info("获得数据:{}", redisService.get(key));
+        logger.info("还剩多少存活时间:{}", redisService.ttl(key));
+        return redisService.get(key);
     }
 }

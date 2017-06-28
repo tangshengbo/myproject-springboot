@@ -1,6 +1,10 @@
 package com.tangshengbo.javaconfig;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tangshengbo.utils.RedisKeys;
+import com.tangshengbo.utils.RedisObjectSerializer;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -9,7 +13,11 @@ import org.springframework.cache.interceptor.SimpleKeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -28,7 +36,6 @@ public class CachingConfig extends CachingConfigurerSupport {
     @Override
     public KeyGenerator keyGenerator() {
         return new SimpleKeyGenerator() {
-
             /**
              * 对参数进行拼接后MD5
              */
@@ -54,7 +61,6 @@ public class CachingConfig extends CachingConfigurerSupport {
         };
     }
 
-
     /**
      * 管理缓存
      *
@@ -74,4 +80,15 @@ public class CachingConfig extends CachingConfigurerSupport {
         rcm.setCacheNames(cacheNames);
         return rcm;
     }
+
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory factory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        template.setConnectionFactory(factory);
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        return template;
+    }
+
 }
