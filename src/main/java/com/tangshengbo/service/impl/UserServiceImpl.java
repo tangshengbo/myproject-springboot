@@ -1,12 +1,13 @@
 package com.tangshengbo.service.impl;
 
-import com.tangshengbo.controller.HelloController;
 import com.tangshengbo.dao.UserMapper;
 import com.tangshengbo.model.User;
 import com.tangshengbo.service.UserService;
+import com.tangshengbo.utils.RedisKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    private static Logger logger = LoggerFactory.getLogger(HelloController.class);
+    private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -48,11 +49,12 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    @Cacheable(value = RedisKeys._CACHE_TEST)
     @Override
     public List<User> findAllUsers() {
-        logger.info("UserServiceImpl.findAllUsers param:{}");
+        logger.info("UserServiceImpl.使用Redis缓存:{}");
         List<User> users = userMapper.findAll();
-        logger.info("UserServiceImpl.findAllUsers result:{}", users.size());
+        logger.info("UserServiceImpl.使用Redis缓存:{}", users.size());
         return users;
     }
 }
