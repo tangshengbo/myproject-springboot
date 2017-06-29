@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -39,5 +41,16 @@ public class RedisController {
         logger.info("获得数据:{}", redisService.get(key));
         logger.info("还剩多少存活时间:{}", redisService.ttl(key));
         return redisService.get(key);
+    }
+
+    @RequestMapping("/uid")
+    public String uid(HttpSession session) {
+        UUID uid = (UUID) session.getAttribute("uid");
+        if (uid == null) {
+            uid = UUID.randomUUID();
+        }
+        logger.info("sessionId:{}", uid);
+        session.setAttribute("uid", uid);
+        return session.getId();
     }
 }
