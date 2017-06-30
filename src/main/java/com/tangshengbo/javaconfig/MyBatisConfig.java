@@ -14,6 +14,7 @@ import java.util.Properties;
 public class MyBatisConfig  {
 
     private static Logger logger = LoggerFactory.getLogger(MyBatisConfig.class);
+
     @Bean
     public PageHelper pageHelper() {
         logger.info("MyBatisConfiguration.pageHelper()");
