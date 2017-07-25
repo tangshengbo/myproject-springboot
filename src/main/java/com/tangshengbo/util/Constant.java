@@ -1,4 +1,4 @@
-package com.tangshengbo.utils;
+package com.tangshengbo.util;
 
 /**
  * 常量类

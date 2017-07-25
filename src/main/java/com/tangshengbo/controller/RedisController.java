@@ -1,11 +1,14 @@
 package com.tangshengbo.controller;
 
 import com.tangshengbo.service.RedisService;
+import com.tangshengbo.util.DistributeLockHandler;
+import com.tangshengbo.util.Lock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -23,6 +26,9 @@ public class RedisController {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private DistributeLockHandler lockHandler;
 
     @RequestMapping("/redisCache/{key}/{value}/{timeOut}")
     public String redisCache(@PathVariable("key") String key, @PathVariable("value") String value,
@@ -53,4 +59,12 @@ public class RedisController {
         session.setAttribute("uid", uid);
         return session.getId();
     }
+
+    @RequestMapping(value = "/lock", method = RequestMethod.GET)
+    public String getLock(String key, String value) {
+        Lock lock = new Lock(key,value);
+        logger.info("getLock:{}", lock.toString());
+        boolean result = lockHandler.tryLock(lock);
+        return result? " success" : "failure";
+   }
 }

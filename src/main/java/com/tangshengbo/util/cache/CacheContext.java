@@ -1,4 +1,4 @@
-package com.tangshengbo.utils.cache;
+package com.tangshengbo.util.cache;
 
 import com.google.common.collect.Maps;
 
