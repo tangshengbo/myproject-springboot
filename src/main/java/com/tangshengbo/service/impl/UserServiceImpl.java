@@ -3,7 +3,7 @@ package com.tangshengbo.service.impl;
 import com.tangshengbo.dao.UserMapper;
 import com.tangshengbo.model.User;
 import com.tangshengbo.service.UserService;
-import com.tangshengbo.utils.RedisKeys;
+import com.tangshengbo.util.RedisKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

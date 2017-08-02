@@ -1,7 +1,7 @@
 package com.tangshengbo.service.impl;
 
 import com.tangshengbo.service.RedisService;
-import com.tangshengbo.utils.RedisKeys;
+import com.tangshengbo.util.RedisKeys;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

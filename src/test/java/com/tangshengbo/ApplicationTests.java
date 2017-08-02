@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static com.tangshengbo.utils.MD5Util.md5;
+import static com.tangshengbo.util.MD5Utils.md5;
 
 /**
  * Created by Administrator on 2016/12/21.
