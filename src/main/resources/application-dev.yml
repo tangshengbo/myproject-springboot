@@ -5,18 +5,14 @@ server:
       enabled: true
 
 logging:
-  level:
-    org:
-      springframework:
-        data:
-          elasticsearch: DEBUG  # To show the search query
+  config: classpath:logback-spring.xml
 
 spring:
     datasource:
         url: jdbc:log4jdbc:mysql://127.0.0.1:3306/myproject?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull
         username: root
         password: root
-        driver-class-name: net.sf.log4jdbc.DriverSpy
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     thymeleaf:
       cache: false
     jpa:

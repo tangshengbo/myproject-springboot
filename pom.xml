@@ -145,10 +145,15 @@
             <version>1.7.21</version>
         </dependency>
         <!--log4jdbc -->
+        <!--<dependency>-->
+            <!--<groupId>com.googlecode.log4jdbc</groupId>-->
+            <!--<artifactId>log4jdbc</artifactId>-->
+            <!--<version>1.2</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>com.googlecode.log4jdbc</groupId>
-            <artifactId>log4jdbc</artifactId>
-            <version>1.2</version>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+            <version>1.16</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
