@@ -102,4 +102,55 @@
       descn = #{descn,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO user(username,PASSWORD,STATUS,descn)
+        <foreach collection="list" item="item" index="index"  separator="union all">
+            select
+            #{item.username,jdbcType=VARCHAR},
+            #{item.password,jdbcType=VARCHAR},
+            #{item.status,jdbcType=INTEGER},
+            #{item.descn,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+    </insert>
+    <update id="updateBatch"  parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index"  separator=";">
+            update user set
+            username = #{item.username,jdbcType=VARCHAR},
+            password = #{item.password,jdbcType=VARCHAR},
+            status = #{item.status,jdbcType=INTEGER},
+            descn = #{item.descn,jdbcType=VARCHAR}
+            where id = #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
+<!--
+  mybatis Oracle 批量插入，批量更新
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO T_CITY_INDEX(
+        id,city_code
+        )
+        select SEQ_CITY_INDEX.NEXTVAL,cd.* from(
+        <foreach collection="list" item="item" index="index"  close=")" open="(" separator="union">
+            select
+            #{item.cityCode,jdbcType=VARCHAR},
+            #{item.cityName,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+        ) cd
+    </insert>
+
+    2、批量跟新
+
+    <update id="updateBatch"  parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close=";end;" separator=";">
+            update T_CITY_INDEX t
+            set
+            t.city_name= #{item.cityName,jdbcType=VARCHAR} ,
+            t.district_name= #{item.districtName,jdbcType=VARCHAR} ,
+            where t.id = #{item.id,jdbcType=NUMERIC}
+        </foreach>
+    </update>-->
+
 </mapper>

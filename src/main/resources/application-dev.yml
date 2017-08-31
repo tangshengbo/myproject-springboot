@@ -9,7 +9,7 @@ logging:
 
 spring:
     datasource:
-        url: jdbc:log4jdbc:mysql://127.0.0.1:3306/myproject?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull
+        url: jdbc:log4jdbc:mysql://127.0.0.1:3306/myproject?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
         username: root
         password: root
         driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
@@ -43,7 +43,7 @@ spring:
         enabled: false
 
 flyway:
-  url: jdbc:mysql://127.0.0.1:3306/myproject?useUnicode=true&useSSL=false&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+  url: jdbc:mysql://127.0.0.1:3306/myproject?useUnicode=true&useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
   user: root
   password: root
   validateOnMigrate: false  # ignore flyway validation

@@ -1,10 +1,9 @@
 package com.tangshengbo.dao;
 
 import com.tangshengbo.model.User;
-import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.mapstruct.Mapper;
 
 import java.util.List;
 
@@ -19,9 +18,15 @@ public interface UserMapper  {
     @Select("SELECT * FROM user WHERE id = #{id}")
     User findById(@Param("id") Long id);
 
-    @Insert("INSERT INTO USER(username,PASSWORD,STATUS,descn) VALUES(#{user.username},#{user.password},#{user.status},#{user.descn})")
+    //@Insert("INSERT INTO USER(username,PASSWORD,STATUS,descn) VALUES(#{user.username},#{user.password},#{user.status},#{user.descn})")
     int insert(@Param("user")User user);
 
-    @Select("SELECT * FROM user ")
+//    @Select("SELECT * FROM user ")
     List<User> findAll();
+
+    int updateByPrimaryKey(User user);
+
+    void insertBatch(List<User> users);
+
+    void updateBatch(List<User> users);
 }

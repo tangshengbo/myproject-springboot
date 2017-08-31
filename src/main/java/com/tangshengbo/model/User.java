@@ -24,6 +24,17 @@ public class User implements Serializable {
 
     private String descn;
 
+    public User(String username, String password, Integer status, String descn) {
+        this.username = username;
+        this.password = password;
+        this.status = status;
+        this.descn = descn;
+    }
+
+    public User() {
+    }
+
+
     public Long getId() {
         return id;
     }

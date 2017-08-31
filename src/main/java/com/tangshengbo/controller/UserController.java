@@ -74,16 +74,30 @@ public class UserController {
         return users;
     }
 
-
     @RequestMapping("/first/{username}")
     public List<User> findFirst10(@PathVariable("username") String username) {
         List<User> users = userRepository.findTop5Byusername(username);
         return users;
     }
+
     @RequestMapping("/pagehelper/{page}/{size}")
     public List<User> listUserByPage(@PathVariable("page") int page, @PathVariable("size") int size) {
         PageHelper.startPage(page,size);
         return userService.findAllUsers();
     }
 
+    @RequestMapping("/save-batch/{count}")
+    public void saveBatch(@PathVariable("count") int count) {
+         userService.saveBatchUser(count);
+    }
+
+    @RequestMapping("/update-batch/{count}")
+    public void updateBatch(@PathVariable("count") int count) {
+        userService.updateBatchUser(count);
+    }
+
+    @RequestMapping("/update/{count}")
+    public void update(@PathVariable("count") int count) {
+        userService.updateUser(count);
+    }
 }

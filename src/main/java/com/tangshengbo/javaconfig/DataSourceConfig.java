@@ -10,6 +10,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -52,7 +54,14 @@ public class DataSourceConfig {
 //      SqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapping/*.xml"));
 //      sqlSessionFactoryBean.setTypeAliasesPackage("com.tangshengbo.service");
 
-        return sqlSessionFactoryBean.getObject();
+        //添加XML目录
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        try {
+            sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapping/*.xml"));
+            return sqlSessionFactoryBean.getObject();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Bean

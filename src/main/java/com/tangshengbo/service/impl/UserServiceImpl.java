@@ -1,5 +1,6 @@
 package com.tangshengbo.service.impl;
 
+import com.google.common.collect.Lists;
 import com.tangshengbo.dao.UserMapper;
 import com.tangshengbo.model.User;
 import com.tangshengbo.service.UserService;
@@ -56,5 +57,62 @@ public class UserServiceImpl implements UserService {
         List<User> users = userMapper.findAll();
         logger.info("UserServiceImpl.使用Redis缓存:{}", users.size());
         return users;
+    }
+
+    @Override
+    public void saveBatchUser(int batchCount) {
+        logger.info("批量插入开始...................");
+        List<User> users = Lists.newArrayList();
+        for (int i = 0; i < batchCount; i++) {
+            users.add(new User("唐声波", "tangshengbo", 1, "tangshengbo" + i));
+        }
+        logger.info("插入总数{}", users.size());
+//        userMapper.insertBatch(users);
+        saveBatch(users);
+        logger.info("批量插入结束...................");
+    }
+
+    @Override
+    public void updateBatchUser(int batchCount) {
+        logger.info("批量更新开始...................");
+        List<User> users = Lists.newArrayList();
+        for (int i = 0; i < batchCount; i++) {
+            User user = new User("唐声波", "lyl", 0, "tangshengbo");
+            user.setId((long) i);
+            users.add(user);
+        }
+        logger.info("更新总数{}", users.size());
+        userMapper.updateBatch(users);
+        logger.info("批量更新结束...................");
+    }
+
+    @Override
+    public int updateUser(int count) {
+        logger.info("更新开始...................");
+        for (int i = 0; i < count; i++) {
+            User user = new User("唐声波", "lyl", 0, "tangshengbo");
+            user.setId((long) i);
+            userMapper.updateByPrimaryKey(user);
+        }
+        logger.info("更新结束...................");
+        return 0;
+    }
+
+    private void saveBatch(List<User> list) {
+        int size = list.size();
+        int unitNum = 1000;
+        int startIndex = 0;
+        int endIndex = 0;
+        while (size > 0) {
+            if (size > unitNum) {
+                endIndex = startIndex + unitNum;
+            } else {
+                endIndex = startIndex + size;
+            }
+            List<User> insertBatch = list.subList(startIndex, endIndex);
+            userMapper.insertBatch(insertBatch);
+            size = size - unitNum;
+            startIndex = endIndex;
+        }
     }
 }

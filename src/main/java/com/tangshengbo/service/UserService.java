@@ -17,4 +17,9 @@ public interface UserService {
 
     List<User> findAllUsers();
 
+    void saveBatchUser(int batchCount);
+
+    void updateBatchUser(int batchCount);
+
+    int updateUser(int count);
 }
