@@ -74,4 +74,23 @@ public abstract class AbstractService<T> implements Service<T> {
     public List<T> findAll() {
         return myMapper.selectAll();
     }
+
+    @Override
+    public void saveBatch(List<T> list) {
+        int size = list.size();
+        int unitNum = 1000;
+        int startIndex = 0;
+        int endIndex = 0;
+        while (size > 0) {
+            if (size > unitNum) {
+                endIndex = startIndex + unitNum;
+            } else {
+                endIndex = startIndex + size;
+            }
+            List<T> insertBatch = list.subList(startIndex, endIndex);
+            myMapper.insertBatch(insertBatch);
+            size = size - unitNum;
+            startIndex = endIndex;
+        }
+    }
 }

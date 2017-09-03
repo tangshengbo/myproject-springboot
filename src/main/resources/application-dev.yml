@@ -44,8 +44,8 @@ spring:
     mvc:
       throw-exception-if-no-handler-found: true
     resources:
-      static-locations: classpath:/static/
       add-mappings: false
+      static-locations: classpath:/static/
 
 
 flyway:

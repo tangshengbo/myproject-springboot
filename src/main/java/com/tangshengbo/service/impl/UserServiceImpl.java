@@ -42,8 +42,8 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             users.add(new User("唐声波", "tangshengbo", 1, "tangshengbo" + i));
         }
         logger.info("插入总数{}", users.size());
-        userMapper.insertList(users);
-//        saveBatch(users);
+//        userMapper.insertList(users);
+        saveBatch(users);
         logger.info("批量插入结束...................");
     }
 
@@ -73,21 +73,21 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         return 0;
     }
 
-    private void saveBatch(List<User> list) {
-        int size = list.size();
-        int unitNum = 1000;
-        int startIndex = 0;
-        int endIndex = 0;
-        while (size > 0) {
-            if (size > unitNum) {
-                endIndex = startIndex + unitNum;
-            } else {
-                endIndex = startIndex + size;
-            }
-            List<User> insertBatch = list.subList(startIndex, endIndex);
-            userMapper.insertBatch(insertBatch);
-            size = size - unitNum;
-            startIndex = endIndex;
-        }
-    }
+//    private void saveBatch(List<T> list, MyMapper myMapper) {
+//        int size = list.size();
+//        int unitNum = 1000;
+//        int startIndex = 0;
+//        int endIndex = 0;
+//        while (size > 0) {
+//            if (size > unitNum) {
+//                endIndex = startIndex + unitNum;
+//            } else {
+//                endIndex = startIndex + size;
+//            }
+//            List<T> insertBatch = list.subList(startIndex, endIndex);
+//            myMapper.insertBatch(insertBatch);
+//            size = size - unitNum;
+//            startIndex = endIndex;
+//        }
+//    }
 }
