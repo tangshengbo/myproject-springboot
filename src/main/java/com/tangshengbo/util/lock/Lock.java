@@ -1,4 +1,4 @@
-package com.tangshengbo.util;
+package com.tangshengbo.util.lock;
 
 /**
  * Created by TangShengBo on 2017-07-25.

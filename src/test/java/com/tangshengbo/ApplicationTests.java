@@ -28,7 +28,7 @@ public class ApplicationTests {
 
     @Test
     public void testFindUser() throws Exception {
-        User user = userService.findUserById(1L);
+        User user = userService.findById(1);
         logger.info("ApplicationTests.testFindUser result:{}", user.toString());
     }
 
@@ -40,8 +40,8 @@ public class ApplicationTests {
         user.setPassword(md5("123456789"));
         user.setStatus(1);
 
-        int result = userService.addUser(user);
-        List<User> users = userService.findAllUsers();
+        int result = userService.save(user);
+        List<User> users = userService.findAll();
         for (User u : users) {
             if (md5("123456789").equals(u.getPassword())) {
                 logger.warn("md5 equals {}" + u.getPassword());

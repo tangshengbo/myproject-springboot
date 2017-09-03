@@ -1,8 +1,9 @@
 package com.tangshengbo.service.impl;
 
 import com.google.common.collect.Lists;
-import com.tangshengbo.dao.UserMapper;
+import com.tangshengbo.dao.UserMyMapper;
 import com.tangshengbo.model.User;
+import com.tangshengbo.service.AbstractService;
 import com.tangshengbo.service.UserService;
 import com.tangshengbo.util.RedisKeys;
 import org.slf4j.Logger;
@@ -14,47 +15,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/12/20.
+ * Created by TangShengBo on 2016/12/20.
  */
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends AbstractService<User> implements UserService {
 
     private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
-    private UserMapper userMapper;
-
-    @Override
-    public User selectUserById(Long id) {
-        logger.info("UserServiceImpl.selectUserById param:{}", id);
-        User user = userMapper.selectByPrimaryKey(id);
-        logger.info("UserServiceImpl.selectUserById result:{}", user.toString());
-        return user;
-    }
-
-    @Override
-    public User findUserById(Long id) {
-        logger.info("UserServiceImpl.findById param:{}", id);
-        User user = userMapper.findById(id);
-        logger.info("UserServiceImpl.findById result:{}", user.toString());
-        return user;
-    }
-
-    @Override
-    public int addUser(User user) {
-        logger.info("UserServiceImpl.addUser param:{}", user.toString());
-        int result = userMapper.insert(user);
-        //language=MySQL
-        String json = "SELECT * FROM user WHERE id = 1 ";
-        logger.info("UserServiceImpl.addUser result:{}", result);
-        return result;
-    }
+    private UserMyMapper userMapper;
 
     @Cacheable(value = RedisKeys._CACHE_TEST)
     @Override
-    public List<User> findAllUsers() {
+    public List<User> findAll() {
         logger.info("UserServiceImpl.使用Redis缓存:{}");
-        List<User> users = userMapper.findAll();
+        List<User> users = userMapper.selectAll();
         logger.info("UserServiceImpl.使用Redis缓存:{}", users.size());
         return users;
     }
@@ -67,8 +42,8 @@ public class UserServiceImpl implements UserService {
             users.add(new User("唐声波", "tangshengbo", 1, "tangshengbo" + i));
         }
         logger.info("插入总数{}", users.size());
-//        userMapper.insertBatch(users);
-        saveBatch(users);
+        userMapper.insertList(users);
+//        saveBatch(users);
         logger.info("批量插入结束...................");
     }
 

@@ -1,8 +1,8 @@
 package com.tangshengbo.controller;
 
 import com.tangshengbo.service.RedisService;
-import com.tangshengbo.util.DistributeLockHandler;
-import com.tangshengbo.util.Lock;
+import com.tangshengbo.util.lock.DistributeLockHandler;
+import com.tangshengbo.util.lock.Lock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

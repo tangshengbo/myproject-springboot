@@ -1,4 +1,4 @@
-package com.tangshengbo.model;
+package com.tangshengbo.util;
 
 /**
  * Created by tangshengbo on 2017/1/10.

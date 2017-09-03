@@ -1,10 +1,13 @@
 package com.tangshengbo.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tangshengbo.model.Model;
 import com.tangshengbo.model.User;
 import com.tangshengbo.repository.UserRepository;
 import com.tangshengbo.service.UserService;
+import com.tangshengbo.util.ResponseMessage;
+import com.tangshengbo.util.ResponseGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,12 +54,12 @@ public class UserController {
     }
 
     @RequestMapping("/getuser/{id}")
-    public User getUser(@PathVariable("id") Long id) {
+    public User getUser(@PathVariable("id") int id) {
         logger.info("UserController.getUser param:{}", id);
         //mybatis xml
         //User user = userService.selectUserById(id);
         //mybatis annotation
-        User user = userService.findUserById(id);
+        User user = userService.findById(id);
         logger.info("UserController.getUser result:{}", user.toString());
         return user;
     }
@@ -81,14 +84,16 @@ public class UserController {
     }
 
     @RequestMapping("/pagehelper/{page}/{size}")
-    public List<User> listUserByPage(@PathVariable("page") int page, @PathVariable("size") int size) {
-        PageHelper.startPage(page,size);
-        return userService.findAllUsers();
+    public ResponseMessage listUserByPage(@PathVariable("page") int page, @PathVariable("size") int size) {
+        PageHelper.startPage(page, size);
+        List<User> users = userService.findAll();
+        PageInfo<User> pageInfo = new PageInfo<>(users);
+        return ResponseGenerator.genSuccessResult(pageInfo);
     }
 
     @RequestMapping("/save-batch/{count}")
     public void saveBatch(@PathVariable("count") int count) {
-         userService.saveBatchUser(count);
+        userService.saveBatchUser(count);
     }
 
     @RequestMapping("/update-batch/{count}")

@@ -1,4 +1,4 @@
-package com.tangshengbo.util;
+package com.tangshengbo.util.lock;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

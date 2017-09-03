@@ -6,7 +6,6 @@ server:
 
 logging:
   config: classpath:logback-spring.xml
-
 spring:
     datasource:
         url: jdbc:log4jdbc:mysql://127.0.0.1:3306/myproject?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
@@ -29,7 +28,7 @@ spring:
       host: 127.0.0.1
       port: 6379
       password:
-         # 连接超时时间（毫秒）
+     # 连接超时时间（毫秒）
       timeout: 10000
       pool:
         max-idle: 20
@@ -41,6 +40,13 @@ spring:
       in-memory: true
       pool:
         enabled: false
+     # 404 交给异常处理器处理
+    mvc:
+      throw-exception-if-no-handler-found: true
+    resources:
+      static-locations: classpath:/static/
+      add-mappings: false
+
 
 flyway:
   url: jdbc:mysql://127.0.0.1:3306/myproject?useUnicode=true&useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
