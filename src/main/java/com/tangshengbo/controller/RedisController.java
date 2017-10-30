@@ -1,6 +1,7 @@
 package com.tangshengbo.controller;
 
 import com.tangshengbo.service.RedisService;
+import com.tangshengbo.util.RedisLock;
 import com.tangshengbo.util.lock.DistributeLockHandler;
 import com.tangshengbo.util.lock.Lock;
 import org.slf4j.Logger;
@@ -67,4 +68,13 @@ public class RedisController {
         boolean result = lockHandler.tryLock(lock);
         return result? " success" : "failure";
    }
+
+    private static int i = 0;
+
+    @RedisLock(lockKey = "lockKey1")
+    @RequestMapping(value = "/lock-redis", method = RequestMethod.GET)
+    public void add() {
+        i++;
+        logger.info("i=***************************************" + i);
+    }
 }
