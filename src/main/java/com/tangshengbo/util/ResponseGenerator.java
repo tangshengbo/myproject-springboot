@@ -1,6 +1,6 @@
 package com.tangshengbo.util;
 
-import com.tangshengbo.emum.ResponseCode;
+import com.tangshengbo.enums.ResponseCode;
 
 /**
  * 响应结果生成工具

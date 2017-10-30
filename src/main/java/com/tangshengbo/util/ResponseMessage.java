@@ -1,7 +1,7 @@
 package com.tangshengbo.util;
 
 import com.alibaba.fastjson.JSON;
-import com.tangshengbo.emum.ResponseCode;
+import com.tangshengbo.enums.ResponseCode;
 
 /**
  * Created by tangshengbo on 2017/1/10.

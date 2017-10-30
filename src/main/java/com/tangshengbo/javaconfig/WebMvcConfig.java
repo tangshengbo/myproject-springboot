@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
-import com.tangshengbo.emum.ResponseCode;
+import com.tangshengbo.enums.ResponseCode;
 import com.tangshengbo.exception.ServiceException;
 import com.tangshengbo.util.ResponseMessage;
 import org.slf4j.Logger;
@@ -42,7 +42,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter4 converter = new FastJsonHttpMessageConverter4();
         FastJsonConfig config = new FastJsonConfig();
-        config.setSerializerFeatures(SerializerFeature.WriteMapNullValue,//保留空的字段
+        //保留空的字段
+        config.setSerializerFeatures(SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteNullStringAsEmpty,//String null -> ""
                 SerializerFeature.WriteNullNumberAsZero);//Number null -> 0
         converter.setFastJsonConfig(config);
@@ -56,7 +57,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         exceptionResolvers.add(new HandlerExceptionResolver() {
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
                 ResponseMessage result = new ResponseMessage();
-                if (e instanceof ServiceException) {//业务失败的异常，如“账号或密码错误”
+                //业务失败的异常，如“账号或密码错误”
+                if (e instanceof ServiceException) {
                     result.setCode(ResponseCode.FAIL).setMessage(e.getMessage());
                     logger.info(e.getMessage());
                 } else if (e instanceof NoHandlerFoundException) {
