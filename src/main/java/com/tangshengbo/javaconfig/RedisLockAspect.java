@@ -10,7 +10,7 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -25,23 +25,23 @@ public class RedisLockAspect {
 
     private static Logger logger= LoggerFactory.getLogger(RedisLockAspect.class);
 
-    @Value("${spring.redis.host}:${spring.redis.port}")
-    String address;
+    @Autowired
+    private RedissonClient redissonClient;
 
     @Around("@annotation(com.tangshengbo.util.RedisLock)")
     public Object lock(ProceedingJoinPoint point) throws Throwable {
         RLock lock = null;
         Object object = null;
-        logger.info("into Aspect!");
+        logger.info("into RedisLockAspect!");
         try {
             RedisLock redisLock = getDistRedisLockInfo(point);
             RedisUtils redisUtils = RedisUtils.getInstance();
-            RedissonClient redissonClient = RedisUtils.createClient("127.0.0.1:6379", null);
+
             String lockKey = redisUtils.getLockKey(point, redisLock.lockKey());
 
             lock = redisUtils.getRLock(redissonClient, lockKey);
             if (lock != null) {
-                Boolean status = lock.tryLock(redisLock.maxSleepMills(), redisLock.keepMills(), TimeUnit.MILLISECONDS);
+                boolean status = lock.tryLock(redisLock.maxSleepMills(), redisLock.keepMills(), TimeUnit.MILLISECONDS);
                 if (status) {
                     object = point.proceed();
                 }
