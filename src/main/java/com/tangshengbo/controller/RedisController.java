@@ -74,7 +74,7 @@ public class RedisController {
     @RedisLock(lockKey = "lockKey1")
     @RequestMapping(value = "/lock-redis", method = RequestMethod.GET)
     public void add() {
-        i++;
+        i = i / 0;
         logger.info("i=***************************************" + i);
     }
 }

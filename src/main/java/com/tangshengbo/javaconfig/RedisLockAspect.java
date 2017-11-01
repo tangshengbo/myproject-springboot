@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @Aspect
 public class RedisLockAspect {
 
-    private static Logger logger= LoggerFactory.getLogger(RedisLockAspect.class);
+    private static Logger logger = LoggerFactory.getLogger(RedisLockAspect.class);
 
     @Autowired
     private RedissonClient redissonClient;
@@ -32,23 +32,24 @@ public class RedisLockAspect {
     public Object lock(ProceedingJoinPoint point) throws Throwable {
         RLock lock = null;
         Object object = null;
+        String lockKey = null;
         logger.info("into RedisLockAspect!");
         try {
             RedisLock redisLock = getDistRedisLockInfo(point);
-            RedisUtils redisUtils = RedisUtils.getInstance();
-
-            String lockKey = redisUtils.getLockKey(point, redisLock.lockKey());
-
-            lock = redisUtils.getRLock(redissonClient, lockKey);
+            assert redisLock != null;
+            lockKey = RedisUtils.getLockKey(point, redisLock.lockKey());
+            lock = RedisUtils.getRLock(redissonClient, lockKey);
             if (lock != null) {
                 boolean status = lock.tryLock(redisLock.maxSleepMills(), redisLock.keepMills(), TimeUnit.MILLISECONDS);
                 if (status) {
+                    logger.warn("获得Redis锁 {}", lockKey, Thread.currentThread().getName());
                     object = point.proceed();
                 }
             }
         } finally {
             if (lock != null) {
                 lock.unlock();
+                logger.warn("释放Redis锁 {}", lockKey, Thread.currentThread().getName());
             }
         }
         return object;
