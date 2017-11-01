@@ -1,4 +1,4 @@
-package com.tangshengbo.util;
+package com.tangshengbo.util.lock;
 
 import org.springframework.stereotype.Component;
 

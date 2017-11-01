@@ -1,7 +1,7 @@
 package com.tangshengbo.controller;
 
 import com.tangshengbo.service.RedisService;
-import com.tangshengbo.util.RedisLock;
+import com.tangshengbo.util.lock.RedisLock;
 import com.tangshengbo.util.lock.DistributeLockHandler;
 import com.tangshengbo.util.lock.Lock;
 import org.slf4j.Logger;

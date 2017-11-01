@@ -1,6 +1,6 @@
 package com.tangshengbo.javaconfig;
 
-import com.tangshengbo.util.RedissonProperties;
+import com.tangshengbo.util.lock.RedissonProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

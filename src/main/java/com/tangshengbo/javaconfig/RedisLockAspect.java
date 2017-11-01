@@ -1,6 +1,6 @@
 package com.tangshengbo.javaconfig;
 
-import com.tangshengbo.util.RedisLock;
+import com.tangshengbo.util.lock.RedisLock;
 import com.tangshengbo.util.RedisUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -28,7 +28,7 @@ public class RedisLockAspect {
     @Autowired
     private RedissonClient redissonClient;
 
-    @Around("@annotation(com.tangshengbo.util.RedisLock)")
+    @Around("@annotation(com.tangshengbo.util.lock.RedisLock)")
     public Object lock(ProceedingJoinPoint point) throws Throwable {
         RLock lock = null;
         Object object = null;

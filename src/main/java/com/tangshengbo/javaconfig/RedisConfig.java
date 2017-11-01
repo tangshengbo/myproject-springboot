@@ -1,6 +1,6 @@
 package com.tangshengbo.javaconfig;
 
-import com.tangshengbo.util.RedisKeys;
+import com.tangshengbo.util.lock.RedisKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
