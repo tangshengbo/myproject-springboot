@@ -39,7 +39,6 @@ public class WebLogAspect {
         logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "."
                 + joinPoint.getSignature().getName());
         logger.info("参数 : " + Arrays.toString(joinPoint.getArgs()));
-
     }
 
     // returning的值和doAfterReturning的参数名一致
@@ -52,8 +51,12 @@ public class WebLogAspect {
     @Around("logPointCut()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
         long startTime = System.currentTimeMillis();
-        Object ob = pjp.proceed();// ob 为方法的返回值
-        logger.info("耗时 : " + (System.currentTimeMillis() - startTime) + "ms");
+        Object ob = null;// ob 为方法的返回值
+        try {
+            ob = pjp.proceed();
+        } finally {
+            logger.info("耗时 : " + (System.currentTimeMillis() - startTime) + "ms");
+        }
         return ob;
     }
 

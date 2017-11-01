@@ -42,14 +42,14 @@ public class RedisLockAspect {
             if (lock != null) {
                 boolean status = lock.tryLock(redisLock.maxSleepMills(), redisLock.keepMills(), TimeUnit.MILLISECONDS);
                 if (status) {
-                    logger.warn("获得Redis锁 {}", lockKey, Thread.currentThread().getName());
+                    logger.warn("获得Redis锁 {} {}", lockKey, Thread.currentThread().getName());
                     object = point.proceed();
                 }
             }
         } finally {
             if (lock != null) {
                 lock.unlock();
-                logger.warn("释放Redis锁 {}", lockKey, Thread.currentThread().getName());
+                logger.warn("释放Redis锁 {} {}", lockKey, Thread.currentThread().getName());
             }
         }
         return object;
