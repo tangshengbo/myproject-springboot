@@ -34,6 +34,5 @@ public class HealthTest {
     public void checkOkTest() throws Exception {
         mockMvc.perform(get("/ok"))
                 .andExpect(status().isOk());
-
     }
 }
