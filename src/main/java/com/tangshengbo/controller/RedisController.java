@@ -4,6 +4,7 @@ import com.tangshengbo.service.RedisService;
 import com.tangshengbo.util.lock.RedisLock;
 import com.tangshengbo.util.lock.DistributeLockHandler;
 import com.tangshengbo.util.lock.Lock;
+import jodd.util.ThreadUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +75,8 @@ public class RedisController {
     @RedisLock(lockKey = "lockKey1")
     @RequestMapping(value = "/lock-redis", method = RequestMethod.GET)
     public void add() {
-        i = i / 0;
+//        i = i / 0;
+        ThreadUtil.sleep(5000);
         logger.info("i=***************************************" + i);
     }
 }

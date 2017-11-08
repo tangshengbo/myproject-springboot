@@ -20,7 +20,7 @@ public @interface RedisLock {
      * 持锁时间
      * 单位毫秒,默认5秒<br/>
      */
-    long keepMills() default 5 * 1000;
+    long keepMills() default 10 * 1000;
 
     /**
      * 没有获取到锁时，等待时间
