@@ -47,8 +47,8 @@ public class RedisLockAspect {
             }
         } finally {
             if (lock != null) {
-                    lock.unlock();
-                    logger.warn("释放Redis锁 {} {}", lockKey, Thread.currentThread().getName());
+                lock.unlock();
+                logger.warn("释放Redis锁 {} {}", lockKey, Thread.currentThread().getName());
             }
         }
         return object;
