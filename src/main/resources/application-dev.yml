@@ -46,7 +46,10 @@ spring:
     resources:
       add-mappings: false
       static-locations: classpath:/static/
-
+    mail:
+      host: smtp.houbank.cn
+      username: ENC(TQfGGjZ5dOcXBs69q7Fn3xKOjf86loiYur4QOQ12jVs=)
+      password: ENC(MwfRmZnTLxdK6Jslst6XBfPaFnAorXYC)
 
 flyway:
   url: jdbc:mysql://127.0.0.1:3306/myproject?useUnicode=true&useSSL=false&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
@@ -58,6 +61,11 @@ flyway:
  # redisson lock
 redisson:
    address: redis://127.0.0.1:6379
+
+jasypt:
+  encryptor:
+    password: e!Jd&ljyJ^e4I5oU
+
 
 
 

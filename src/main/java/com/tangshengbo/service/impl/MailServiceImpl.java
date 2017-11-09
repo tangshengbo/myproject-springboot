@@ -4,13 +4,14 @@ import com.tangshengbo.service.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Tangshengbo on 2017/8/2.
  */
+@Service
 public class MailServiceImpl implements MailService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -18,17 +19,12 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    @Value("${mail.username}")
-    private String from;
-
     @Override
     public void sendSimpleMail(String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(content);
-
         try {
             mailSender.send(message);
             logger.info("简单邮件已经发送。");
