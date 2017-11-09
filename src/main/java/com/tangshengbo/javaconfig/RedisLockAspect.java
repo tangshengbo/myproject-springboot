@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by TangShengBo on 2017-10-30.
@@ -40,7 +41,7 @@ public class RedisLockAspect {
             lock = RedisUtils.getRLock(redissonClient, lockKey);
             if (lock != null) {
                 logger.warn("isHeldByCurrentThread　begin {}", lock.isHeldByCurrentThread());
-                if (lock.tryLock()) {
+                if (lock.tryLock(redisLock.maxSleepMills(), redisLock.keepMills(), TimeUnit.MILLISECONDS)) {
                     logger.warn("获得Redis锁 {} {}", lockKey, Thread.currentThread().getName());
                     object = point.proceed();
                 }
