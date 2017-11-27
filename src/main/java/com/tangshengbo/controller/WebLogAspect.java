@@ -22,7 +22,7 @@ public class WebLogAspect {
     private static final Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
     //两个..代表所有子目录，最后括号里的两个..代表所有参数
-    @Pointcut("execution(public * com.tangshengbo.controller.*.*(..))")
+    @Pointcut("execution(public com.tangshengbo.model.Account com.tangshengbo.controller.*.*(..))")
     public void logPointCut() {
     }
 

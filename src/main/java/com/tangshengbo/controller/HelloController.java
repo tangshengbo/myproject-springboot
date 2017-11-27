@@ -1,6 +1,7 @@
 package com.tangshengbo.controller;
 
 import com.google.common.collect.Lists;
+import com.tangshengbo.model.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,10 @@ public class HelloController {
     private ServletContext servletContext;
 
     @RequestMapping("/hello")
-    public String greeting(@RequestParam(value = "name", required = false, defaultValue = "{\"word\":\"tang\"}") String name, Model model) {
+    public Account greeting(@RequestParam(value = "name", required = false, defaultValue = "{\"word\":\"tang\"}") String name, Model model) {
         logger.info("hello");
         model.addAttribute("name", name);
-        return "hello";
+        return new Account();
     }
 
     @RequestMapping("/getjars")
