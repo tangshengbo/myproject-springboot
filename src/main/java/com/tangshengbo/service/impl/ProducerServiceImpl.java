@@ -35,7 +35,7 @@ public class ProducerServiceImpl implements ProducerService {
         messagingTemplate.convertAndSend(destination, message);
     }
 
-    @JmsListener(destination = "consumer.queue")
+//    @JmsListener(destination = "consumer.queue")
     @Override
     public void consumerMessage(String message) {
         logger.info("接收consumer.queue发送的消息:{}", message);

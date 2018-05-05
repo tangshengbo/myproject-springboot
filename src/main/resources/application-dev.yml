@@ -47,7 +47,7 @@ spring:
       add-mappings: false
       static-locations: classpath:/static/
     mail:
-      host: smtp.houbank.cn
+      host: smtp.qq.com
       username: ENC(TQfGGjZ5dOcXBs69q7Fn3xKOjf86loiYur4QOQ12jVs=)
       password: ENC(MwfRmZnTLxdK6Jslst6XBfPaFnAorXYC)
 
@@ -65,6 +65,11 @@ redisson:
 jasypt:
   encryptor:
     password: e!Jd&ljyJ^e4I5oU
+
+endpoints:
+  actuator:
+    enabled: true
+    sensitive: false
 
 
 
