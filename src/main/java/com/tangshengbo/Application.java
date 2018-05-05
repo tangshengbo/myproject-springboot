@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @SpringBootApplication
@@ -15,7 +17,11 @@ public class Application {
 
     private static Logger logger = LoggerFactory.getLogger(Application.class);
 
-
+    @RequestMapping("/")
+    @ResponseBody
+    public String greeting() {
+        return "OK";
+    }
     /*public String greeting() {
         return "Hello World!";
     }
