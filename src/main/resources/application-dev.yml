@@ -66,6 +66,9 @@ flyway:
  # redisson lock
 redisson:
    address: redis://127.0.0.1:6379
+   connectionPoolSize: 20
+   connectionMinimumIdleSize: 10
+   timeout: 6000
 
 jasypt:
   encryptor:

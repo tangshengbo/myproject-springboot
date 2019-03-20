@@ -1,5 +1,6 @@
 package com.tangshengbo.util.lock;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -96,5 +97,10 @@ public class RedissonProperties {
 
     public void setConnectionMinimumIdleSize(int connectionMinimumIdleSize) {
         this.connectionMinimumIdleSize = connectionMinimumIdleSize;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

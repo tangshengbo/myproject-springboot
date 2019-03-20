@@ -32,6 +32,7 @@ public class RedissonConfig {
     @Bean(destroyMethod = "shutdown")
     @ConditionalOnProperty(name = "redisson.address")
     RedissonClient redissonSingle() {
+        System.out.println(redssionProperties);
         Config config = new Config();
         SingleServerConfig serverConfig = config.useSingleServer()
                 .setAddress(redssionProperties.getAddress())

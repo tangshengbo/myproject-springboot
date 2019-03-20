@@ -1,0 +1,35 @@
+{
+  "groups": [
+    {
+      "name": "redisson",
+      "type": "com.tangshengbo.model.RedissonProperties",
+      "sourceType": "com.tangshengbo.model.RedissonProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "redisson.address",
+      "type": "java.lang.String",
+      "sourceType": "com.tangshengbo.model.RedissonProperties"
+    },
+    {
+      "name": "redisson.connectionPoolSize",
+      "type": "java.lang.Integer",
+      "sourceType": "com.tangshengbo.model.RedissonProperties",
+      "defaultValue": 64
+    },
+    {
+      "name": "redisson.connectionMinimumIdleSize",
+      "type": "java.lang.Integer",
+      "sourceType": "com.tangshengbo.model.RedissonProperties",
+      "defaultValue": 10
+    },
+    {
+      "name": "redisson.timeout",
+      "type": "java.lang.Integer",
+      "sourceType": "com.tangshengbo.model.RedissonProperties",
+      "defaultValue": 3000
+    }
+  ],
+  "hints": []
+}
