@@ -40,37 +40,41 @@ public class FileUploadController {
      */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public String upload(@RequestParam("file") MultipartFile file) {
-        if (!file.isEmpty()) {
-            try {
-                // 这里只是简单例子，文件直接输出到项目路径下。
-                // 实际项目中，文件需要输出到指定位置，需要在增加代码处理。
-                // 还有关于文件格式限制、文件大小限制，详见：中配置。
-                //BufferedInputStream bis = new BufferedInputStream(file.getInputStream());
-                BufferedOutputStream out = new BufferedOutputStream(
-                        new FileOutputStream(file.getOriginalFilename()));
-                /*byte[] buf = new byte[(int)file.getSize()];
-                int byteNum;
-                logger.info("文件总大小:{}", file.getSize());
-                while ((byteNum = bis.read(buf)) != -1) {
-                    logger.info("每次读文件返回:{}", byteNum);
-                    out.write(buf);
-                }*/
-                out.write(file.getBytes());
-                out.flush();
-                out.close();
-                //bis.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                return "上传失败," + e.getMessage();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "上传失败," + e.getMessage();
-            }
-            return "上传成功";
-        } else {
-            return "上传失败，因为文件是空的.";
-        }
+    public String upload(@RequestPart("file") Part file) {
+        logger.info("{}", file.getSubmittedFileName());
+        logger.info("{}", file.getContentType());
+        logger.info("{}", file.getSize() / 1024);
+//        if (!file.isEmpty()) {
+//            try {
+//                // 这里只是简单例子，文件直接输出到项目路径下。
+//                // 实际项目中，文件需要输出到指定位置，需要在增加代码处理。
+//                // 还有关于文件格式限制、文件大小限制，详见：中配置。
+//                //BufferedInputStream bis = new BufferedInputStream(file.getInputStream());
+//                BufferedOutputStream out = new BufferedOutputStream(
+//                        new FileOutputStream(file.getOriginalFilename()));
+//                /*byte[] buf = new byte[(int)file.getSize()];
+//                int byteNum;
+//                logger.info("文件总大小:{}", file.getSize());
+//                while ((byteNum = bis.read(buf)) != -1) {
+//                    logger.info("每次读文件返回:{}", byteNum);
+//                    out.write(buf);
+//                }*/
+//                out.write(file.getBytes());
+//                out.flush();
+//                out.close();
+//                //bis.close();
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//                return "上传失败," + e.getMessage();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "上传失败," + e.getMessage();
+//            }
+//
+//        } else {
+//            return "上传失败，因为文件是空的.";
+//        }
+        return "上传成功";
     }
 
     /**
