@@ -5,9 +5,11 @@ import com.tangshengbo.dao.AccountMapper;
 import com.tangshengbo.model.Account;
 import com.tangshengbo.service.AbstractService;
 import com.tangshengbo.service.AccountService;
+import com.tangshengbo.util.lock.RedisKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -42,5 +44,11 @@ public class AccountServiceImpl extends AbstractService<Account> implements Acco
     @Override
     public void updateBatchAccount(int batchCount) {
 
+    }
+
+    @Cacheable(value = RedisKeys._CACHE_TEST)
+    @Override
+    public List<Account> findAll() {
+        return accountMapper.selectAll();
     }
 }
